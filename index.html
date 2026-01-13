@@ -46,6 +46,16 @@
             text-transform: uppercase;
         }
 
+        .intro-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 20px 40px;
+        }
+
+        .intro-section .detail-content {
+            margin-bottom: 0;
+        }
+
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -162,9 +172,11 @@
             align-items: center;
             justify-content: center;
         }
-.video-container iframe {
+.video-container iframe,
+.video-container video {
   position: absolute;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   border: 0;
@@ -290,6 +302,35 @@
             <h1>System of a Down</h1>
             <p>Museum Exhibit</p>
         </div>
+        <div class="intro-section">
+            <div class="detail-content">
+                <div class="detail-info">
+                    <h1>The Voice</h1>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Established</label>
+                            <p>1994 - Present</p>
+                        </div>
+                        <div class="info-item">
+                            <label>Origin</label>
+                            <p>Glendale, California</p>
+                        </div>
+                        <div class="info-item">
+                            <label>Members</label>
+                            <p>Serj Tankian, Daron Malakian, Shavo Odadjian, John Dolmayan</p>
+                        </div>
+                        <div class="info-item">
+                            <label>Mission</label>
+                            <p>Amplifying silenced voices through music</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="essay">
+                    <h2>About This Artifact</h2>
+                    <p>System of a Down represents the voice of people whose histories, suffering, and resistance are erased by dominant power structures - and who reclaim agency by refusing silence, conformity, or forgetfulness.</p>
+                </div>
+            </div>
+        </div>
         <div class="gallery">
             <div class="artifact-card" onclick="showArtifact(1)">
   <img src="images/dTy4SR.gif" alt="Cigaro">
@@ -313,16 +354,10 @@
     <p>Enter Exhibit</p>
   </div>
 </div>
-            <div class="artifact-card" onclick="showArtifact(4)" style="background: #000;">
+            <div class="artifact-card" onclick="showArtifact(4)">
+                <img src="images/_109458470_844dd458-13fc-41a3-9b48-90cdf00596fe.jpg" alt="P.L.U.C.K.">
                 <div class="overlay">
-                    
                     <h2>P.L.U.C.K.</h2>
-                    <p>Enter Exhibit</p>
-                </div>
-            </div>
-            <div class="artifact-card" onclick="showArtifact(5)" style="background: #1a1a1a;">
-                <div class="overlay">
-                    <h2>The Voice</h2>
                     <p>Enter Exhibit</p>
                 </div>
             </div>
@@ -334,12 +369,10 @@
         <div class="detail-content">
             <div>
                 <div class="video-container">
-                    <iframe
-                        src="https://www.youtube-nocookie.com/embed/zUzd9KyIDrM?start=24&rel=0"
-                        title="System of a Down - B.Y.O.B."
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                    </iframe>
+                    <video controls preload="metadata" playsinline>
+                        <source src="videos/System%20Of%20A%20Down%20-%20B.Y.O.B.%20(Official%20HD%20Video)%20%5BzUzd9KyIDrM%5D.webm#t=24" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
 
             </div>
@@ -376,12 +409,10 @@
         <div class="detail-content">
             <div>
                 <div class="video-container">
-                    <iframe
-                        src="https://www.youtube-nocookie.com/embed/oFI2Sse8z1o?rel=0"
-                        title="System of a Down - Cigaro"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                    </iframe>
+                    <video controls preload="metadata" playsinline>
+                        <source src="videos/System%20Of%20A%20Down%20-%20Cigaro%20(Official%20Audio)%20%5BL4M98z22pgI%5D.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
             </div>
             <div class="detail-info">
@@ -418,12 +449,10 @@
         <div class="detail-content">
             <div>
                 <div class="video-container">
-                    <iframe
-                        src="https://www.youtube-nocookie.com/embed/5vBGOrI6yBk?rel=0"
-                        title="System of a Down - Sugar"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                    </iframe>
+                    <video controls preload="metadata" playsinline>
+                        <source src="videos/System%20Of%20A%20Down%20-%20Sugar%20(Official%20HD%20Video)%20%5B5vBGOrI6yBk%5D.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
             </div>
             <div class="detail-info">
@@ -459,12 +488,10 @@
         <div class="detail-content">
             <div>
                 <div class="video-container">
-                    <iframe
-                        src="https://www.youtube-nocookie.com/embed/DnGdoEa1tPg?rel=0"
-                        title="System of a Down - P.L.U.C.K."
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                    </iframe>
+                    <video controls preload="metadata" playsinline>
+                        <source src="videos/P.L.U.C.K.%20%5BXnZsAHIwBgg%5D.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
             </div>
             <div class="detail-info">
@@ -495,49 +522,7 @@
             <p>P.L.U.C.K. is a protest song that directly addresses the Armenian Genocide and the global denial. The song gives voice to descendants of genocide survivors whose history has been politically erased, silenced, or minimized by dominant narratives as they have been themselves being Armenian American. Through aggressive musical structure, the song refuses reconciliation without acknowledgment, insisting that memory itself is an act of resistance. In saving testimonies through sound, P.L.U.C.K. challenges the stereotype that historical violence belongs only to the past.</p>
         </div>
     </div>
-
-    <div class="detail-page" id="artifact5">
-        <button class="back-button" onclick="showIndex()">Back to Gallery</button>
-        <div class="detail-content">
-            <div>
-                <div class="video-container">
-                    <iframe
-                        src="https://www.youtube-nocookie.com/embed/videoseries?list=PLSKnqXrhOqbrS5phBLO-FDxu97m1AvDwI&rel=0"
-                        title="System of a Down - Playlist"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-            </div>
-            <div class="detail-info">
-                <h1>The Voice</h1>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <label>Established</label>
-                        <p>1994 - Present</p>
-                    </div>
-                    <div class="info-item">
-                        <label>Origin</label>
-                        <p>Glendale, California</p>
-                    </div>
-                    <div class="info-item">
-                        <label>Members</label>
-                        <p>Serj Tankian, Daron Malakian, Shavo Odadjian, John Dolmayan</p>
-                    </div>
-                    <div class="info-item">
-                        <label>Mission</label>
-                        <p>Amplifying silenced voices through music</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="essay">
-            <h2>About This Artifact</h2>
-            <p>System of a Down represents the voice of people whose histories, suffering, and resistance are erased by dominant power structures—and who reclaim agency by refusing silence, conformity, or forgetfulness.</p>
-        </div>
-    </div>
-
-    <script>
+<script>
         function showArtifact(num) {
             document.getElementById('indexPage').style.display = 'none';
             document.querySelectorAll('.detail-page').forEach(page => {
@@ -557,4 +542,5 @@
     </script>
 </body>
 </html>
+
 
