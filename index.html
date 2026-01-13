@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System of a Down - Museum Exhibit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .index-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            color: #c41e3a;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #888;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 0;
+            flex: 1;
+        }
+
+        .artifact-card {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            cursor: pointer;
+            background: #1a1a1a;
+        }
+        .artifact-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* fills frame without stretching */
+  display: block;
+}
+
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(196,30,58,0.8) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .artifact-card:hover .overlay {
+            opacity: 1;
+        }
+
+        .overlay h2 {
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+
+        .overlay p {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            transform: translateY(20px);
+            transition: transform 0.4s ease 0.1s;
+        }
+
+        .artifact-card:hover .overlay h2,
+        .artifact-card:hover .overlay p {
+            transform: translateY(0);
+        }
+
+        .detail-page {
+            display: none;
+            min-height: 100vh;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .detail-page.active {
+            display: block;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #c41e3a;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+            transition: background 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background: #a01830;
+        }
+
+        .detail-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(196,30,58,0.3);
+            background: linear-gradient(135deg, rgba(196,30,58,0.3), rgba(0,0,0,0.9));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+.video-container iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+        .video-link {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .video-link:hover {
+            background: linear-gradient(135deg, rgba(196,30,58,0.5), rgba(0,0,0,0.95));
+        }
+
+        .video-link svg {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            transition: transform 0.3s ease;
+        }
+
+        .video-link:hover svg {
+            transform: scale(1.1);
+        }
+
+        .video-link span {
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .detail-info h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #c41e3a;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .info-grid {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-item {
+            border-left: 3px solid #c41e3a;
+            padding-left: 15px;
+        }
+
+        .info-item label {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888;
+            margin-bottom: 5px;
+        }
+
+        .info-item p {
+            font-size: 1.1rem;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .essay {
+            background: #1a1a1a;
+            padding: 40px;
+            border-left: 5px solid #c41e3a;
+        }
+
+        .essay h2 {
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: #c41e3a;
+            letter-spacing: 1px;
+        }
+
+        .essay p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .essay {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="index-page" id="indexPage">
+        <div class="header">
+            <h1>System of a Down</h1>
+            <p>Museum Exhibit</p>
+        </div>
+        <div class="gallery">
+            <div class="artifact-card" onclick="showArtifact(1)">
+  <img src="images/dTy4SR.gif" alt="Cigaro">
+  <div class="overlay">
+    <h2>BYOB</h2>
+    <p>Enter Exhibit</p>
+  </div>
+</div>
+            <div class="artifact-card" onclick="showArtifact(2)">
+  <img src="images/cigaro.jpg" alt="Cigaro">
+  <div class="overlay">
+    <h2>Cigaro</h2>
+    <p>Enter Exhibit</p>
+  </div>
+</div>
+
+            <div class="artifact-card" onclick="showArtifact(3)">
+  <img src="images/SOADhand.jpg" alt="Sugar">
+  <div class="overlay">
+    <h2>Sugar</h2>
+    <p>Enter Exhibit</p>
+  </div>
+</div>
+            <div class="artifact-card" onclick="showArtifact(4)" style="background: #000;">
+                <div class="overlay">
+                    
+                    <h2>P.L.U.C.K.</h2>
+                    <p>Enter Exhibit</p>
+                </div>
+            </div>
+            <div class="artifact-card" onclick="showArtifact(5)" style="background: #1a1a1a;">
+                <div class="overlay">
+                    <h2>The Voice</h2>
+                    <p>Enter Exhibit</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-page" id="artifact1">
+        <button class="back-button" onclick="showIndex()">Back to Gallery</button>
+        <div class="detail-content">
+            <div>
+                <div class="video-container">
+                    <iframe
+                        src="https://www.youtube-nocookie.com/embed/zUzd9KyIDrM?start=24&rel=0"
+                        title="System of a Down - B.Y.O.B."
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+            </div>
+            <div class="detail-info">
+                <h1>B.Y.O.B.</h1>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Year</label>
+                        <p>2005</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Album</label>
+                        <p>Mezmerize</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Theme</label>
+                        <p>Anti-war protest and political critique</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Significance</label>
+                        <p>Grammy Award winner for Best Hard Rock Performance</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="essay">
+            <h2>About This Artifact</h2>
+            <p>B.Y.O.B. is a 2005 protest song that critiques the political and economic forces behind modern warfare. The song gives voice to working-class and marginalized Americans who are disproportionately sent to fight wars they did not choose, while political and corporate leaders remain protected from the consequences. Through sharp satire lyrics and violent sounds, the song exposes the hypocrisy of patriotic spectacle that masks human suffering. In doing so, B.Y.O.B. resists silence by transforming anger and irony into testimony, refusing to allow war to be presented as noble or detached from real lives.</p>
+        </div>
+    </div>
+
+    <div class="detail-page" id="artifact2">
+        <button class="back-button" onclick="showIndex()">Back to Gallery</button>
+        <div class="detail-content">
+            <div>
+                <div class="video-container">
+                    <iframe
+                        src="https://www.youtube-nocookie.com/embed/oFI2Sse8z1o?rel=0"
+                        title="System of a Down - Cigaro"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+            <div class="detail-info">
+                <h1>Cigaro</h1>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Year</label>
+                        <p>2005</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Album</label>
+                        <p>Mezmerize</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Theme</label>
+                        <p>Satirical critique of toxic masculinity</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Lyric Excerpt</label>
+                        <p>"We're the regulators that deregulate / We're the animators that de-animate"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="essay">
+            <h2>About This Artifact</h2>
+            <p>We're the regulators that deregulate / We're the animators that de-animate / We're cool, in denial We're the cruel regulators smoking cigaro, cigaro, cigar / Cool, in denial We're the cruel regulators smoking cigaro, cigaro, cigaro</p>
+            <p>Cigaro is a satirical song that belittles masculinity, dominance, and authority to the point of absurdity. The limited yet powerful lyrics reflect the stupidity of military comparison and the effect of it. The song represents voices marginalized by systems that equate power with aggression, humiliation, and control, exposing how authority often speaks at people rather than listening to them. In doing so, Cigaro resists stereotypes by revealing how domination culture dehumanizes both those who wield power and those silenced by it.</p>
+        </div>
+    </div>
+
+    <div class="detail-page" id="artifact3">
+        <button class="back-button" onclick="showIndex()">Back to Gallery</button>
+        <div class="detail-content">
+            <div>
+                <div class="video-container">
+                    <iframe
+                        src="https://www.youtube-nocookie.com/embed/5vBGOrI6yBk?rel=0"
+                        title="System of a Down - Sugar"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+            <div class="detail-info">
+                <h1>Sugar</h1>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Year</label>
+                        <p>1998</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Album</label>
+                        <p>System of a Down</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Theme</label>
+                        <p>Media manipulation and sensationalism</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Significance</label>
+                        <p>Early critique of mass media control</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="essay">
+            <h2>About This Artifact</h2>
+            <p>Sugar critiques how politics and media are using to paranoia and "sensationalism" to herd. The song represents those that sound "crazy" which society is silencing and creating through it's entertaining yet disturbing substance. Maybe it's just what humans want?</p>
+        </div>
+    </div>
+
+    <div class="detail-page" id="artifact4">
+        <button class="back-button" onclick="showIndex()">Back to Gallery</button>
+        <div class="detail-content">
+            <div>
+                <div class="video-container">
+                    <iframe
+                        src="https://www.youtube-nocookie.com/embed/DnGdoEa1tPg?rel=0"
+                        title="System of a Down - P.L.U.C.K."
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+            <div class="detail-info">
+                <h1>P.L.U.C.K.</h1>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Year</label>
+                        <p>1998</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Album</label>
+                        <p>System of a Down</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Theme</label>
+                        <p>Armenian Genocide recognition</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Title Meaning</label>
+                        <p>Politically Lying, Unholy, Cowardly Killers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="essay">
+            <h2>About This Artifact</h2>
+            <p>Revolution, the only solution / The armed response of an entire nation / Revolution, the only solution / We've taken all their s**t, now it's time for restitution / The plan was mastered and called genocide / You took all the children and then we died / The few that remained were never found / All in a system, down</p>
+            <p>P.L.U.C.K. is a protest song that directly addresses the Armenian Genocide and the global denial. The song gives voice to descendants of genocide survivors whose history has been politically erased, silenced, or minimized by dominant narratives as they have been themselves being Armenian American. Through aggressive musical structure, the song refuses reconciliation without acknowledgment, insisting that memory itself is an act of resistance. In saving testimonies through sound, P.L.U.C.K. challenges the stereotype that historical violence belongs only to the past.</p>
+        </div>
+    </div>
+
+    <div class="detail-page" id="artifact5">
+        <button class="back-button" onclick="showIndex()">Back to Gallery</button>
+        <div class="detail-content">
+            <div>
+                <div class="video-container">
+                    <iframe
+                        src="https://www.youtube-nocookie.com/embed/videoseries?list=PLSKnqXrhOqbrS5phBLO-FDxu97m1AvDwI&rel=0"
+                        title="System of a Down - Playlist"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+            <div class="detail-info">
+                <h1>The Voice</h1>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Established</label>
+                        <p>1994 - Present</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Origin</label>
+                        <p>Glendale, California</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Members</label>
+                        <p>Serj Tankian, Daron Malakian, Shavo Odadjian, John Dolmayan</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Mission</label>
+                        <p>Amplifying silenced voices through music</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="essay">
+            <h2>About This Artifact</h2>
+            <p>System of a Down represents the voice of people whose histories, suffering, and resistance are erased by dominant power structures—and who reclaim agency by refusing silence, conformity, or forgetfulness.</p>
+        </div>
+    </div>
+
+    <script>
+        function showArtifact(num) {
+            document.getElementById('indexPage').style.display = 'none';
+            document.querySelectorAll('.detail-page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById('artifact' + num).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function showIndex() {
+            document.querySelectorAll('.detail-page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById('indexPage').style.display = 'flex';
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
+
