@@ -503,6 +503,14 @@
             border: 0;
         }
 
+        .video-container img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .info-grid {
             display: grid;
             gap: 16px;
@@ -669,7 +677,7 @@
                 </div>
                 <div class="manifesto-card">
                     <h3>About This Artifact</h3>
-                    <p>System of a Down represents the voice of people whose histories, suffering, and resistance are erased by dominant power structures - and who reclaim agency by refusing silence, conformity, or forgetfulness.</p>
+                    <p>System of a Down represents the voice of people whose histories, suffering, and resistance are erased by dominant power structures. Who reclaim agency by refusing silence, conformity, or forgetfulness.</p>
                 </div>
             </div>
         </section>
@@ -707,6 +715,13 @@
                     <div class="artifact-overlay">
                         <div class="artifact-label">P.L.U.C.K.</div>
                         <div class="artifact-sub">1998 - Memory and resistance</div>
+                    </div>
+                </button>
+                <button class="artifact-card" onclick="showArtifact(5)" type="button">
+                    <img src="images/Prison_Industrial_Complex_Small.png" alt="Prison Song">
+                    <div class="artifact-overlay">
+                        <div class="artifact-label">Prison Song</div>
+                        <div class="artifact-sub">2001 - Prison privatization</div>
                     </div>
                 </button>
             </div>
@@ -754,7 +769,7 @@
         </div>
         <div class="essay">
             <h2>About This Artifact</h2>
-            <p>B.Y.O.B. is a 2005 protest song that critiques the political and economic forces behind modern warfare. The song gives voice to working-class and marginalized Americans who are disproportionately sent to fight wars they did not choose, while political and corporate leaders remain protected from the consequences. Through sharp satire lyrics and violent sounds, the song exposes the hypocrisy of patriotic spectacle that masks human suffering. In doing so, B.Y.O.B. resists silence by transforming anger and irony into testimony, refusing to allow war to be presented as noble or detached from real lives.</p>
+            <p>B.Y.O.B. is a 2005 protest song that critiques the political forces behind modern warfare. The song gives voice to working-class and marginalized Americans who are disproportionately sent to fight wars they did not choose, while political and corporate leaders remain protected from the consequences. Through sharp satire lyrics and violent sounds, the song exposes the hypocrisy of calling war patriotic when it is just masked suffering for the powerfuls will. In doing so, B.Y.O.B. resists silence by pinpointing the true irony of the modern wars they resist, refusing to allow war to be presented as noble or detached from real lives.</p>
         </div>
     </div>
 
@@ -800,7 +815,7 @@
         <div class="essay">
             <h2>About This Artifact</h2>
             <p>We're the regulators that deregulate / We're the animators that de-animate / We're cool, in denial We're the cruel regulators smoking cigaro, cigaro, cigar / Cool, in denial We're the cruel regulators smoking cigaro, cigaro, cigaro</p>
-            <p>Cigaro is a satirical song that belittles masculinity, dominance, and authority to the point of absurdity. The limited yet powerful lyrics reflect the stupidity of military comparison and the effect of it. The song represents voices marginalized by systems that equate power with aggression, humiliation, and control, exposing how authority often speaks at people rather than listening to them. In doing so, Cigaro resists stereotypes by revealing how domination culture dehumanizes both those who wield power and those silenced by it.</p>
+            <p>Cigaro is a satirical song that belittles masculinity, dominance, and authority to the point of absurdity. The limited yet powerful lyrics reflect the stupidity of military comparison and the effect of it. The song represents voices marginalized by systems that hold power with aggression, humiliation, and control, exposing how authority often speaks at people rather than listening to them. In doing so, Cigaro resists stereotypes by revealing how domination culture dehumanizes both those who wield power and those silenced by it. </p>
         </div>
     </div>
 
@@ -895,6 +910,46 @@
         </div>
     </div>
 
+    <div class="detail-page" id="artifact5" aria-hidden="true">
+        <div class="detail-hero">
+            <button class="back-button" onclick="showIndex()">Back to Gallery</button>
+            <div class="detail-heading">
+                <span class="eyebrow">Artifact Five</span>
+                <h1>Prison Song</h1>
+                <p>Prison privatization and the machinery of mass incarceration.</p>
+            </div>
+        </div>
+        <div class="detail-content">
+            <div>
+                <div class="video-container">
+                    <video controls preload="metadata" playsinline>
+                        <source src="videos/System Of A Down - Prison Song (Official Audio) [m4L20t8Dvlg].webm#t=47" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+            <div class="detail-info">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Year</label>
+                        <p>2001</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Album</label>
+                        <p>Toxicity</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Theme</label>
+                        <p>Prison Privatization</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="essay">
+            <h2>About This Artifact</h2>
+            <p>Prison Song reveals the problems with the American Prison system showing it as a mechanism of silencing and economic gain rather than justice. The song gives voice to communities disproportionately targeted by policing and sentencing, whose lives are controlled, confined, and removed from public empathy. Using rapid lyrics and fast rythym, the song mirrors the mechinary of a industrial prison complex.By naming these structures directly, System of a Down refuses the narrative that mass incarceration is neutral or necessary, insisting instead on recognition of the human cost behind institutional power.</p>
+        </div>
+    </div>
     <script>
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
